@@ -1,0 +1,34 @@
+---
+- name: apply common configuration to all nodes
+  hosts: all
+  gather_facts: false
+  roles:
+    - role: common
+
+- name: start weed master service
+  hosts: masters
+  gather_facts: true
+  any_errors_fatal: true
+  roles:
+    - role: weed-master
+
+- name: start weed volume service
+  hosts: volumes
+  gather_facts: true
+  any_errors_fatal: true
+  roles:
+    - role: weed-volume
+
+- name: start weed filer service
+  hosts: filers
+  gather_facts: true
+  any_errors_fatal: true
+  roles:
+    - role: weed-filer
+
+- name: start weed s3 service (S3 API)
+  hosts: s3s
+  gather_facts: true
+  any_errors_fatal: true
+  roles:
+    - role: weed-s3

@@ -1,0 +1,14 @@
+---
+- name: create weed master directory
+  file:
+    path: "{{ mdir }}"
+    state: directory
+    owner: root
+    group: root
+    mode: "0755"
+
+- name: Start weedfs master
+  args:
+      chdir: "{{ workdir }}"
+      executable: /bin/bash
+  shell: weed -v={{ loglevel }} -logdir={{ logsdir }} master -mdir={{ mdir }} -ip={{ ansible_enp2s0f0.ipv4.address }} -port={{ port }} -metrics.address={{ metrics.address }} -metrics.intervalSeconds={{ metrics.intervalSeconds }} -defaultReplication={{ defaultReplication }} -peers={{ peers }} &

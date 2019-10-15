@@ -1,0 +1,26 @@
+---
+###########
+# GENERAL #
+###########
+
+port: "9333"
+peers: "10.10.100.12:9333,10.10.100.13:9333,10.10.100.14:9333"
+mdir: "/opt/seaweedfs/master"
+
+##########
+# TUNING #
+##########
+
+disableHttp: false
+pulseSeconds: "5"
+volumeSizeLimitMB: 3000
+defaultReplication: "000"
+garbageThreshold: "0.3"
+
+###########
+# METRICS #
+###########
+
+metrics:
+  intervalSeconds: "15"
+  address: "10.10.100.12:9091"

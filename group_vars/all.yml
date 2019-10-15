@@ -1,0 +1,18 @@
+---
+loglevel: 3
+workdir: /opt/seaweedfs/
+logsdir: /opt/seaweedfs/logs
+
+##########
+#  DISK  #
+##########
+
+disks:
+  /dev/sdb: /opt/seaweedfs/data1
+  /dev/sdc: /opt/seaweedfs/data2
+  /dev/sdd: /opt/seaweedfs/data3
+  /dev/sde: /opt/seaweedfs/data4
+  /dev/sdf: /opt/seaweedfs/data5
+  /dev/sdg: /opt/seaweedfs/data6
+  /dev/sdh: /opt/seaweedfs/data7
+  /dev/sdi: /opt/seaweedfs/data8

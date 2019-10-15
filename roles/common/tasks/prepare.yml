@@ -1,0 +1,16 @@
+---
+- name: create weed work directory
+  file:
+    path: "{{ workdir }}"
+    state: directory
+    owner: root
+    group: root
+    mode: "0755"
+
+- name: create weed logs directory
+  file:
+    path: "{{ logsdir }}"
+    state: directory
+    owner: root
+    group: root
+    mode: "0755"
