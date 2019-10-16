@@ -1,0 +1,92 @@
+# A sample TOML config file for SeaweedFS filer store
+# Used with "weed filer" or "weed server -filer"
+# Put this file to one of the location, with descending priority
+#    ./filer.toml
+#    $HOME/.seaweedfs/filer.toml
+#    /etc/seaweedfs/filer.toml
+
+[memory]
+# local in memory, mostly for testing purpose
+enabled = {{ memory.enabled }}
+
+[leveldb]
+# local on disk, mostly for simple single-machine setup, fairly scalable
+enabled = {{ leveldb.enabled }}
+dir = {{ leveldb.dir }}					# directory to store level db files
+
+[leveldb2]
+# local on disk, mostly for simple single-machine setup, fairly scalable
+# faster than previous leveldb, recommended.
+enabled = {{ leveldb2.enabled }}
+dir = {{ leveldb2.dir }}					# directory to store level db files
+
+####################################################
+# multiple filers on shared storage, fairly scalable
+####################################################
+
+[mysql]  # or tidb
+# CREATE TABLE IF NOT EXISTS filemeta (
+#   dirhash     BIGINT         COMMENT 'first 64 bits of MD5 hash value of directory field',
+#   name        VARCHAR(1000)  COMMENT 'directory or file name',
+#   directory   TEXT           COMMENT 'full path to parent directory',
+#   meta        LONGBLOB,
+#   PRIMARY KEY (dirhash, name)
+# ) DEFAULT CHARSET=utf8;
+
+enabled = {{ mysql.enabled }}
+hostname = {{ mysql.hostname }}
+port = {{ mysql.port }}
+username = {{ mysql.username }}
+password = {{ mysql.password }}
+database = {{ mysql.database }}              # create or use an existing database
+connection_max_idle = {{ mysql.connection_max_idle }}
+connection_max_open = {{ mysql.connection_max_open }}
+
+[postgres] # or cockroachdb
+# CREATE TABLE IF NOT EXISTS filemeta (
+#   dirhash     BIGINT,
+#   name        VARCHAR(65535),
+#   directory   VARCHAR(65535),
+#   meta        bytea,
+#   PRIMARY KEY (dirhash, name)
+# );
+enabled = {{ postgres.enabled }}
+hostname = {{ postgres.hostname }}
+port = {{ postgres.port }}
+username = {{ postgres.username }}
+password = {{ postgres.password }}
+database = {{ postgres.database }}              # create or use an existing database
+sslmode = {{ postgres.sslmode }}
+connection_max_idle = {{ postgres.connection_max_idle }}
+connection_max_open = {{ postgres.connection_max_open }}
+
+[cassandra]
+# CREATE TABLE filemeta (
+#    directory varchar,
+#    name varchar,
+#    meta blob,
+#    PRIMARY KEY (directory, name)
+# ) WITH CLUSTERING ORDER BY (name ASC);
+enabled = {{ cassandra.enabled }}
+keyspace= {{ cassandra.keyspace }}
+hosts=[
+	{{ cassandra.hosts }},
+]
+
+[redis]
+enabled = {{ redis.enabled }}
+address  = {{ redis.address }}
+password = {{ redis.password }}
+database = {{ redis.database }}
+
+[redis_cluster]
+enabled = {{ redis_cluster.enabled }}
+addresses = [
+    {{ redis_cluster.addresses }},
+]
+password = {{ redis_cluster.password }}
+
+[etcd]
+enabled = {{ etcd.enabled }}
+servers = {{ etcd.servers }}
+timeout = {{ etcd.timeout }}

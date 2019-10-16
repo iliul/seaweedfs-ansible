@@ -1,0 +1,28 @@
+---
+- name: create seaweedfs config directory
+  file:
+    path: "{{ confdir }}"
+    state: directory
+    owner: root
+    group: root
+    mode: "0755"
+
+- name: write the seaweedfs filer config file
+  template:
+    src: filer.toml.j2
+    dest: /etc/seaweedfs/filer.toml
+    owner: root
+    group: root
+    mode: "0755"
+
+- name: start seaweedfs filer service
+  poll: 0
+  async: 10
+  args:
+      chdir: "{{ workdir }}"
+      executable: /bin/bash
+  shell: "nohup weed -v={{ loglevel }} -logdir={{ logdir }} filer -collection={{ collection }} -ip={{ ansible_enp2s0f0.ipv4.address }} -port={{ filerPort }} -defaultReplicaPlacement={{ defaultReplicaPlacement }} --master={{ peers }} -maxMB={{ maxMB }} > /dev/null 2>&1 &"
+
+- name: debug filer command message
+  debug:
+    msg: "nohup weed -v={{ loglevel }} -logdir={{ logdir }} filer -collection={{ collection }} -ip={{ ansible_enp2s0f0.ipv4.address }} -port={{ filerPort }} -defaultReplicaPlacement={{ defaultReplicaPlacement }} --master={{ peers }} -maxMB={{ maxMB }} > /dev/null 2>&1 &"

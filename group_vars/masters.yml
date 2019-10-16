@@ -4,7 +4,7 @@
 # GENERAL #
 ###########
 
-port: "9333"
+masterPort: "9333"
 mdir: "/opt/seaweedfs/master"
 
 ##########

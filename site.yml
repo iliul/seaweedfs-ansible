@@ -1,7 +1,7 @@
 ---
 - name: apply common configuration to all nodes
   hosts: all
-  gather_facts: false
+  gather_facts: true
   roles:
     - role: common
 

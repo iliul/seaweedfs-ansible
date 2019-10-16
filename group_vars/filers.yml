@@ -1,0 +1,107 @@
+---
+
+###########
+# GENERAL #
+###########
+
+datacenter: "dc1"
+redirectOnRead: true
+disableHttp: false
+disableDirListing: false
+
+##########
+# TUNING #
+##########
+
+filerPort: 8888
+maxMB: 32
+collection: ""
+dirListLimit: 100000
+defaultReplicaPlacement: "000"
+
+##########
+# FILERS #
+##########
+
+memory:
+  enabled: false
+
+leveldb:
+  enabled: false
+  dir: "."
+
+leveldb2:
+  enabled: true
+  dir: "/opt/seaweedfs/"
+
+# CREATE TABLE IF NOT EXISTS filemeta (
+#   dirhash     BIGINT         COMMENT 'first 64 bits of MD5 hash value of directory field',
+#   name        VARCHAR(1000)  COMMENT 'directory or file name',
+#   directory   TEXT           COMMENT 'full path to parent directory',
+#   meta        LONGBLOB,
+#   PRIMARY KEY (dirhash, name)
+# ) DEFAULT CHARSET=utf8;
+
+mysql:
+  enabled: false
+  hostname: "localhost"
+  port: 3306
+  username: "root"
+  password: ""
+  database: ""
+  connection_max_idle: 2
+  connection_max_open: 100
+
+# CREATE TABLE IF NOT EXISTS filemeta (
+#   dirhash     BIGINT,
+#   name        VARCHAR(65535),
+#   directory   VARCHAR(65535),
+#   meta        bytea,
+#   PRIMARY KEY (dirhash, name)
+# );
+
+postgres:
+  enabled: false
+  hostname: "localhost"
+  port: 5432
+  username: "postgres"
+  password: ""
+  database: ""
+  sslmode: "disable"
+  connection_max_idle: 100
+  connection_max_open: 100
+
+# CREATE TABLE filemeta (
+#    directory varchar,
+#    name varchar,
+#    meta blob,
+#    PRIMARY KEY (directory, name)
+# ) WITH CLUSTERING ORDER BY (name ASC);
+
+cassandra:
+  enabled: false
+  keyspace: "seaweedfs"
+  hosts: "localhost:9042"
+
+redis:
+  enabled: false
+  address: "localhost:6379"
+  password: ""
+  database: 0
+
+redis_cluster:
+  enabled: false
+  addresses: [
+      "localhost:30001",
+      "localhost:30002",
+      "localhost:30003",
+      "localhost:30004",
+      "localhost:30005",
+      "localhost:30006",
+  ]
+  password: ""
+
+etcd:
+  enabled: false
+  servers: "localhost:2379"
+  timeout: "3s"

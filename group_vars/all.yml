@@ -6,6 +6,7 @@
 
 loglevel: 3
 workdir: /opt/seaweedfs/
+confdir: /etc/seaweedfs/
 logdir: /opt/seaweedfs/logs
 
 peers: "10.10.100.12:9333,10.10.100.13:9333,10.10.100.14:9333"

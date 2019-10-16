@@ -13,8 +13,8 @@
   args:
       chdir: "{{ workdir }}"
       executable: /bin/bash
-  shell: "nohup weed -v={{ loglevel }} -logdir={{ logdir }} master -mdir={{ mdir }} -ip={{ ansible_enp2s0f0.ipv4.address }} -port={{ port }} -metrics.address={{ metrics.address }} -metrics.intervalSeconds={{ metrics.intervalSeconds }} -defaultReplication={{ defaultReplication }} -peers={{ peers }} > /dev/null 2>&1 &"
+  shell: "nohup weed -v={{ loglevel }} -logdir={{ logdir }} master -mdir={{ mdir }} -ip={{ ansible_enp2s0f0.ipv4.address }} -port={{ masterPort }} -metrics.address={{ metrics.address }} -metrics.intervalSeconds={{ metrics.intervalSeconds }} -defaultReplication={{ defaultReplication }} -peers={{ peers }} > /dev/null 2>&1 &"
 
 - name: debug master command message
   debug:
-    msg: "nohup weed -v={{ loglevel }} -logdir={{ logdir }} master -mdir={{ mdir }} -ip={{ ansible_enp2s0f0.ipv4.address }} -port={{ port }} -metrics.address={{ metrics.address }} -metrics.intervalSeconds={{ metrics.intervalSeconds }} -defaultReplication={{ defaultReplication }} -peers={{ peers }} > /dev/null 2>&1 &"
+    msg: "nohup weed -v={{ loglevel }} -logdir={{ logdir }} master -mdir={{ mdir }} -ip={{ ansible_enp2s0f0.ipv4.address }} -port={{ masterPort }} -metrics.address={{ metrics.address }} -metrics.intervalSeconds={{ metrics.intervalSeconds }} -defaultReplication={{ defaultReplication }} -peers={{ peers }} > /dev/null 2>&1 &"
