@@ -1,31 +1,31 @@
 ---
 - name: create mount point directory
   file:
-    path: "{{ item.value }}"
+    path: "{{ item.value.dir }}"
     state: directory
     owner: root
     group: root
     mode: 0755
-  with_dict: "{{ disks }}"
+  with_dict: "{{ metadata }}"
 
-- name: umount volume node disks
+- name: unmount volume node disks
   mount:
-    path: "{{ item.value }}"
+    path: "{{ item.value.dir }}"
     state: unmounted
-  with_dict: "{{ disks }}"
+  with_dict: "{{ metadata }}"
 
-- name: format datanode disks
+- name: format volume node disks
   filesystem: 
     fstype: xfs 
     dev: "{{ item.key }}"
     force: true
-  with_dict: "{{ disks }}"
+  with_dict: "{{ metadata }}"
 
 - name: mount volume node disks
   mount:
-    path: "{{ item.value }}"
+    path: "{{ item.value.dir }}"
     src: "{{ item.key }}"
     fstype: xfs
     opts: "defaults,noatime,nobarrier"
     state: mounted
-  with_dict: "{{ disks }}"
+  with_dict: "{{ metadata }}"

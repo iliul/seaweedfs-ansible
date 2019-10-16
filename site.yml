@@ -5,28 +5,28 @@
   roles:
     - role: common
 
-- name: start weed master service
+- name: start seaweedfs master service
   hosts: masters
   gather_facts: true
   any_errors_fatal: true
   roles:
     - role: weed-master
 
-- name: start weed volume service
+- name: start seaweedfs volume service
   hosts: volumes
   gather_facts: true
   any_errors_fatal: true
   roles:
     - role: weed-volume
 
-- name: start weed filer service
+- name: start seaweedfs filer service
   hosts: filers
   gather_facts: true
   any_errors_fatal: true
   roles:
     - role: weed-filer
 
-- name: start weed s3 service (S3 API)
+- name: start seaweedfs s3 service
   hosts: s3s
   gather_facts: true
   any_errors_fatal: true

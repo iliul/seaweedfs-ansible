@@ -1,0 +1,12 @@
+- name: start seaweedfs volume service
+  poll: 0
+  async: 10
+  args:
+      chdir: "{{ workdir }}"
+      executable: /bin/bash
+  shell: "nohup weed -v={{ loglevel }} -logdir={{ logdir }} volume -dataCenter={{ item.value.datacenter}} -rack={{ item.value.rack }} -dir={{ item.value.dir }} -ip={{ ansible_enp2s0f0.ipv4.address }} -port={{ item.value.port }} -max={{ max }} -mserver={{ peers }} -read.redirect={{ read.redirect }} -index={{ index }} -ip.bind={{ ip.bind }} -pulseSeconds={{ pulseSeconds }} > /dev/null 2>&1 &"
+  with_dict: "{{ metadata }}"
+
+- name: debug volume command message
+  debug:
+      msg: "nohup weed -v={{ loglevel }} -logdir={{ logdir }} volume -dataCenter={{ item.value.datacenter}} -rack={{ item.value.rack }} -dir={{ item.value.dir }} -ip={{ ansible_enp2s0f0.ipv4.address }} -port={{ item.value.port }} -max={{ max }} -mserver={{ peers }} -read.redirect={{ read.redirect }} -index={{ index }} -ip.bind={{ ip.bind }} -pulseSeconds={{ pulseSeconds }} > /dev/null 2>&1 &"

@@ -1,0 +1,22 @@
+---
+
+###########
+# GENERAL #
+###########
+
+cpuprofile: false
+memprofile: false
+index: "memory"
+read:
+  redirect: true
+ip:
+  bind: "0.0.0.0"
+
+##########
+# TUNING #
+##########
+
+max: 100
+pulseSeconds: 5
+idleTimeout: 30
+compactionMBps: 123

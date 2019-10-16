@@ -1,18 +1,57 @@
 ---
+
+###########
+# GENERAL #
+###########
+
 loglevel: 3
 workdir: /opt/seaweedfs/
-logsdir: /opt/seaweedfs/logs
+logdir: /opt/seaweedfs/logs
 
-##########
-#  DISK  #
-##########
+peers: "10.10.100.12:9333,10.10.100.13:9333,10.10.100.14:9333"
 
-disks:
-  /dev/sdb: /opt/seaweedfs/data1
-  /dev/sdc: /opt/seaweedfs/data2
-  /dev/sdd: /opt/seaweedfs/data3
-  /dev/sde: /opt/seaweedfs/data4
-  /dev/sdf: /opt/seaweedfs/data5
-  /dev/sdg: /opt/seaweedfs/data6
-  /dev/sdh: /opt/seaweedfs/data7
-  /dev/sdi: /opt/seaweedfs/data8
+##############
+#  METADATA  #
+##############
+
+metadata:
+  /dev/sda:
+    dir: /opt/seaweedfs/data1
+    datacenter: dc1
+    rack: r1
+    port: 7080
+  /dev/sdb:
+    dir: /opt/seaweedfs/data2
+    datacenter: dc1
+    rack: r1
+    port: 7081
+  /dev/sdc:
+    dir: /opt/seaweedfs/data3
+    datacenter: dc1
+    rack: r1
+    port: 7082
+  /dev/sdd:
+    dir: /opt/seaweedfs/data4
+    datacenter: dc1
+    rack: r1
+    port: 7083
+  /dev/sde:
+    dir: /opt/seaweedfs/data5
+    datacenter: dc1
+    rack: r1
+    port: 7084
+  /dev/sdf:
+    dir: /opt/seaweedfs/data6
+    datacenter: dc1
+    rack: r1
+    port: 7085
+  /dev/sdg:
+    dir: /opt/seaweedfs/data7
+    datacenter: dc1
+    rack: r1
+    port: 7086
+  /dev/sdh:
+    dir: /opt/seaweedfs/data8
+    datacenter: dc1
+    rack: r1
+    port: 7087
